@@ -25,7 +25,8 @@ $(document).ready(function(){
                 $('#AllPerson').append('<p>El nombre es:  '+i.Name+' '+ i.LastN+ 
                 '    '+'Su edad es:  '+ i.Age+ '   '+ 'La dirección es:  ' +i.Street+ ' '+i.Number+' '+i.Col+ 
                 '    '+ 'Su correo electronico es:  '+i.Email+ '   '+ 'Su número de telefono es:  '+i.Cel+ 
-                '    '+'Su fecha de nacimiento es:  '+i.Date +'</p> <button type="button" class="btn btn-danger del_btn" value="'+i.Email+'"> X </button>')
+                '    '+'Su fecha de nacimiento es:  '+i.Date +
+                '</p> <button type="button" class="btn btn-danger del_btn" value="'+i.Email+'"> Borrar </button> <button type="button" class="btn btn-warning edit_btn" value="'+i.Email+'"> Editar </button>')
             }
         }
         
@@ -108,6 +109,21 @@ $(document).ready(function(){
         console.log(del)
 
         localStorage.setItem('person',JSON.stringify(del))
+        drawName()
+    })
+    //Editar
+    $(document.body).on('click','.edit_btn',function(){
+        console.log(this.value)
+
+        let edit = localStorage.getItem('person')
+        edit=JSON.parse(edit)
+        console.log(edit)
+
+        edit = edit.filter(e => e.Email != this.value)
+
+        console.log(edit)
+
+        localStorage.setItem('person',JSON.stringify(edit))
         drawName()
     })
 
